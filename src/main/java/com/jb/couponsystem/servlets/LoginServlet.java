@@ -32,6 +32,64 @@ public class LoginServlet {
 
 
 	//Methods
+//	@CrossOrigin(origins ="*")
+//	@RequestMapping(method = RequestMethod.GET) //loginservlet
+//	public String doGet(
+//			HttpServletRequest request,
+//			HttpServletResponse response
+//
+//			) throws IOException, ServletException
+//	{
+//		String name = request.getParameter("nametxt");
+//		String password = request.getParameter("passwordtxt");
+//		String  clientType = request.getParameter("clienttype");
+//
+//		CouponSystem couponSystem = new CouponSystem(ctx);
+//
+//		try {
+//
+//			if (clientType.equals("admin")) {
+//				AdminFacade result = (AdminFacade) couponSystem.login(name, password, ClientType.ADMIN);
+//				request.getSession().setAttribute("af", result);
+//				
+//				//return "redirect:http://localhost:4200";
+//				return "redirect:admin/index.html";	
+//	 			
+//			}
+//
+//			else if (clientType.equals("company")) {
+//				CompanyFacade result = (CompanyFacade) couponSystem.login(name, password, ClientType.COMPANY);
+//				request.getSession().setAttribute("cf", result);
+//				
+//				//return "redirect:http://localhost:4200";
+//				return "redirect:company/index.html";
+//			}
+//			
+//			else if (clientType.equals("customer")) {
+//				CustomerFacade result = (CustomerFacade) couponSystem.login(name, password, ClientType.CUSTOMER);
+//				request.getSession().setAttribute("csf", result);
+//				
+//				//return "redirect:http://localhost:4200";
+//				return "redirect:customer/index.html";
+//				
+//				
+//			}
+//		
+//		}
+//
+//		catch (UserNotFoundException e) {
+//		} 
+//
+//		catch (WrongPasswordException e) {
+//		}
+//
+//		return "redirect:errorpage.html";	
+//
+//	}
+	
+	
+	final String  redirectUrl = "https://intense-oasis-61396.herokuapp.com/";
+	
 	@CrossOrigin(origins ="*")
 	@RequestMapping(method = RequestMethod.GET) //loginservlet
 	public String doGet(
@@ -52,8 +110,11 @@ public class LoginServlet {
 				AdminFacade result = (AdminFacade) couponSystem.login(name, password, ClientType.ADMIN);
 				request.getSession().setAttribute("af", result);
 				
+				
+				
 				//return "redirect:http://localhost:4200";
-				return "redirect:admin/index.html";	
+				//return "redirect: admin/index.html";	
+				return "redirect:" + this.redirectUrl + "admin/index.html";	
 	 			
 			}
 
@@ -62,7 +123,8 @@ public class LoginServlet {
 				request.getSession().setAttribute("cf", result);
 				
 				//return "redirect:http://localhost:4200";
-				return "redirect:company/index.html";
+				//return "redirect:company/index.html";
+				return "redirect:" + this.redirectUrl + "company/index.html";
 			}
 			
 			else if (clientType.equals("customer")) {
@@ -70,7 +132,8 @@ public class LoginServlet {
 				request.getSession().setAttribute("csf", result);
 				
 				//return "redirect:http://localhost:4200";
-				return "redirect:customer/index.html";
+				//return "redirect:customer/index.html";
+				return "redirect:" + this.redirectUrl + "customer/index.html";
 				
 				
 			}
@@ -83,7 +146,8 @@ public class LoginServlet {
 		catch (WrongPasswordException e) {
 		}
 
-		return "redirect:errorpage.html";	
+		//return "redirect:errorpage.html";	
+		return "redirect:" + this.redirectUrl + "errorpage.html";
 
 	}
 
