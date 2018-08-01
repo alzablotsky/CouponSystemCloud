@@ -23,7 +23,7 @@ import com.jb.couponsystem.facades.*;
 
 @Controller
 @CrossOrigin("*")
-@RequestMapping("/")
+//@RequestMapping("/loginservlet")
 public class LoginServlet {
 
 	//Attributes	
@@ -88,10 +88,10 @@ public class LoginServlet {
 //	}
 	
 	
-	final String  redirectUrl = "https://intense-oasis-61396.herokuapp.com/";
+	//final String  redirectUrl = "https://intense-oasis-61396.herokuapp.com/";
 	
 	@CrossOrigin(origins ="*")
-	@RequestMapping(method = RequestMethod.GET) //loginservlet
+	@RequestMapping(value= "/loginservlet", method = RequestMethod.GET) 
 	public String doGet(
 			HttpServletRequest request,
 			HttpServletResponse response
