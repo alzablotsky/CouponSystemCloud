@@ -113,8 +113,8 @@ public class LoginServlet {
 				
 				
 				//return "redirect:http://localhost:4200";
-				//return "redirect: admin/index.html";	
-				return "redirect:" + this.redirectUrl + "admin/index.html";	
+				return "redirect: admin/index.html";	
+				//return "redirect:" + this.redirectUrl + "admin/index.html";	
 	 			
 			}
 
@@ -123,8 +123,8 @@ public class LoginServlet {
 				request.getSession().setAttribute("cf", result);
 				
 				//return "redirect:http://localhost:4200";
-				//return "redirect:company/index.html";
-				return "redirect:" + this.redirectUrl + "company/index.html";
+				return "redirect:company/index.html";
+				//return "redirect:" + this.redirectUrl + "company/index.html";
 			}
 			
 			else if (clientType.equals("customer")) {
@@ -132,8 +132,8 @@ public class LoginServlet {
 				request.getSession().setAttribute("csf", result);
 				
 				//return "redirect:http://localhost:4200";
-				//return "redirect:customer/index.html";
-				return "redirect:" + this.redirectUrl + "customer/index.html";
+				return "redirect:customer/index.html";
+				//return "redirect:" + this.redirectUrl + "customer/index.html";
 				
 				
 			}
@@ -146,8 +146,8 @@ public class LoginServlet {
 		catch (WrongPasswordException e) {
 		}
 
-		//return "redirect:errorpage.html";	
-		return "redirect:" + this.redirectUrl + "errorpage.html";
+		return "redirect:errorpage.html";	
+		//return "redirect:" + this.redirectUrl + "errorpage.html";
 
 	}
 
