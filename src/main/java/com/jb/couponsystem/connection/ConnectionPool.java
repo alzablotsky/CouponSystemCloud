@@ -21,6 +21,10 @@ public class ConnectionPool {
 	// maximum number of connections
 	private static final int NUMBER_OF_CONNECTIONS = 5;
 
+	private static final String JDBC_DATABASE_URL = "jdbc:postgresql://ec2-50-16-241-91.compute-1.amazonaws.com:5432/ddq7dvm2gtnmso?sslmode=require&user=woluaerpglffdu&password=1b49a02b34fca862f4820ded890cdaf675a362f80dc2833155e5c0e277ec39cc"
+
+;
+
 	//instance for the class - initially is null
 	private static ConnectionPool _instance = null;
 
@@ -39,8 +43,13 @@ public class ConnectionPool {
 			// create DB connection
 			//DbConnection dbConnection = new DbConnection();
 			
-			Connection dbConnection = DriverManager.getConnection(
-					   "jdbc:postgresql://localhost/webproject","postgres", "admin");
+			//Connection dbConnection = DriverManager.getConnection(
+			//	  "jdbc:postgresql://localhost/webproject","postgres", "admin");
+		
+			
+			Connection dbConnection = DriverManager.getConnection(JDBC_DATABASE_URL);
+						
+			//Connection dbConnection =null;
 
 			// add DBConnection to the list
 			this.connections.add( dbConnection );
