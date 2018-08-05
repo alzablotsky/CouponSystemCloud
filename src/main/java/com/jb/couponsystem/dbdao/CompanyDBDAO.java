@@ -188,7 +188,7 @@ public class CompanyDBDAO implements CompanyDAO{
  * @see com.jb.couponsystem.dao.CompanyDAO#getCompany(long)
  */
 	
-@Cacheable(value = "company", key = "#id")	
+//@Cacheable(value = "company", key = "#id")	
 @Override
 public Company getCompany(long id) throws UserNotFoundException, InterruptedException, SQLException {
 

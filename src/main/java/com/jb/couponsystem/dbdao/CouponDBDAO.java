@@ -268,7 +268,7 @@ public class CouponDBDAO implements CouponDAO {
 	 * (non-Javadoc)
 	 * @see com.jb.couponsystem.dao.CouponDAO#getCompanyCoupon(long)
 	 */
-	@Cacheable(value = "coupon", key = "#id")
+	//@Cacheable(value = "coupon", key = "#id")
 	@Override
 	public Coupon getCompanyCoupon(long id) throws CouponNotFoundException, InterruptedException, SQLException {
 
@@ -433,7 +433,7 @@ public class CouponDBDAO implements CouponDAO {
 	 * (non-Javadoc)
 	 * @see com.jb.couponsystem.dao.CouponDAO#getCoupon(long)
 	 */
-	@Cacheable(value = "coupon", key = "#id")
+	//@Cacheable(value = "coupon", key = "#id")
 	@Override
 	public Coupon getCoupon(long id) throws CouponNotFoundException, InterruptedException, SQLException {
 		//Ask for connection from the connection pool

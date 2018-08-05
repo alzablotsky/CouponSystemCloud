@@ -172,7 +172,7 @@ public class CustomerDBDAO implements CustomerDAO {
 	 * (non-Javadoc)
 	 * @see com.jb.couponsystem.dao.CustomerDAO#getCustomer(long)
 	 */
-	@Cacheable(value = "customer", key = "#id")
+	//@Cacheable(value = "customer", key = "#id")
 	@Override
 	public Customer getCustomer(long id) throws UserNotFoundException, InterruptedException, SQLException {
 
