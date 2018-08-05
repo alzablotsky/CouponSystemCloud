@@ -78,7 +78,7 @@ public class CustomerDBDAO implements CustomerDAO {
 	public void createCustomer(Customer c) throws UserAlreadyExistsException, InterruptedException, SQLException {
 		
 		//Ask for connection from the connection pool
-		Connection dbConnection = ConnectionPool.getInstance().getConnection();
+		DbConnection dbConnection = ConnectionPool.getInstance().getConnection();
 		
 		//If a customer with this ID already exists - return connection and throw exception
 		if (customerRepo.existsById(c.getId())) {
@@ -110,7 +110,7 @@ public class CustomerDBDAO implements CustomerDAO {
 	public void removeCustomer(Customer c) throws UserNotFoundException, InterruptedException, SQLException {
 
 		//Ask for connection from the connection pool
-		Connection dbConnection = ConnectionPool.getInstance().getConnection();
+		DbConnection dbConnection = ConnectionPool.getInstance().getConnection();
 		
 
 		//If a customer with this ID does not exist - return connection and throw exception
@@ -138,7 +138,7 @@ public class CustomerDBDAO implements CustomerDAO {
 	public void updateCustomer(Customer c) throws UserNotFoundException, IllegalUpdateException, InterruptedException, SQLException {
 
 		//Ask for connection from the connection pool
-		Connection dbConnection = ConnectionPool.getInstance().getConnection();
+		DbConnection dbConnection = ConnectionPool.getInstance().getConnection();
 				
 		//Compare to the customer in DB
 		Customer customerInDb = customerRepo.findCustomerById(c.getId());
@@ -172,12 +172,12 @@ public class CustomerDBDAO implements CustomerDAO {
 	 * (non-Javadoc)
 	 * @see com.jb.couponsystem.dao.CustomerDAO#getCustomer(long)
 	 */
-	//@Cacheable(value = "customer", key = "#id")
+	
 	@Override
 	public Customer getCustomer(long id) throws UserNotFoundException, InterruptedException, SQLException {
 
 		//Ask for connection from the connection pool
-		Connection dbConnection = ConnectionPool.getInstance().getConnection();
+		DbConnection dbConnection = ConnectionPool.getInstance().getConnection();
 				
 		//If the customer with this ID does not exist - return connection and throw exception
 		if  (!customerRepo.existsById(id))  {
@@ -203,7 +203,7 @@ public class CustomerDBDAO implements CustomerDAO {
 	public Collection<Customer> getAllCustomers() throws UserNotFoundException, InterruptedException, SQLException {
 		
 		//Ask for connection from the connection pool
-		Connection dbConnection = ConnectionPool.getInstance().getConnection();
+		DbConnection dbConnection = ConnectionPool.getInstance().getConnection();
 		
 		Collection<Customer> cust = (Collection<Customer>) customerRepo.findAll();
 
@@ -231,7 +231,7 @@ public class CustomerDBDAO implements CustomerDAO {
 	public Collection<Coupon> getCoupons() throws CouponNotFoundException, InterruptedException, SQLException {
 		
 		//Ask for connection from the connection pool
-		Connection dbConnection = ConnectionPool.getInstance().getConnection();
+		DbConnection dbConnection = ConnectionPool.getInstance().getConnection();
 				
 		Collection<Coupon> coupons = this.loginCustomer.getCoupons();
 
@@ -262,7 +262,7 @@ public class CustomerDBDAO implements CustomerDAO {
 			throws UserNotFoundException, WrongPasswordException, InterruptedException, SQLException {
 
 		//Ask for connection from the connection pool
-				Connection dbConnection = ConnectionPool.getInstance().getConnection();
+				DbConnection dbConnection = ConnectionPool.getInstance().getConnection();
 				
 		//If a customer with this name does not exist - return connection and throw exception
 		if (!customerRepo.existsByCustomerName(customerName)) {

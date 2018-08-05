@@ -74,7 +74,7 @@ public class CompanyDBDAO implements CompanyDAO{
 	public void createCompany(Company c) throws UserAlreadyExistsException, InterruptedException, SQLException {
 		
 		//Ask for connection from the connection pool
-		Connection dbConnection = ConnectionPool.getInstance().getConnection();
+		DbConnection dbConnection = ConnectionPool.getInstance().getConnection();
 		
 		//If a company with this ID already exists - return connection and throw exception
 		if (( companyRepo).existsById(c.getId())) {
@@ -116,7 +116,7 @@ public class CompanyDBDAO implements CompanyDAO{
 	public void removeCompany(Company c) throws UserNotFoundException, InterruptedException, SQLException {
 		
 		//Ask for connection from the connection pool
-		Connection dbConnection = ConnectionPool.getInstance().getConnection();
+		DbConnection dbConnection = ConnectionPool.getInstance().getConnection();
 		
 		//If a company with this ID does not exist - return connection and throw exception
 		if (!companyRepo.existsById(c.getId())) {
@@ -147,7 +147,7 @@ public class CompanyDBDAO implements CompanyDAO{
 	public void updateCompany(Company c) throws UserNotFoundException, IllegalUpdateException, InterruptedException, SQLException {
 	
 		//Ask for connection from the connection pool
-		Connection dbConnection = ConnectionPool.getInstance().getConnection();
+		DbConnection dbConnection = ConnectionPool.getInstance().getConnection();
 		
 		//Compare to the company in DB
 		Company companyInDb = companyRepo.findCompanyById(c.getId());
@@ -188,12 +188,11 @@ public class CompanyDBDAO implements CompanyDAO{
  * @see com.jb.couponsystem.dao.CompanyDAO#getCompany(long)
  */
 	
-//@Cacheable(value = "company", key = "#id")	
 @Override
 public Company getCompany(long id) throws UserNotFoundException, InterruptedException, SQLException {
 
 	//Ask for connection from the connection pool
-	Connection dbConnection = ConnectionPool.getInstance().getConnection();
+	DbConnection dbConnection = ConnectionPool.getInstance().getConnection();
 	
 	Company c = companyRepo.findCompanyById(id);
 	
@@ -225,7 +224,7 @@ public Company getCompany(long id) throws UserNotFoundException, InterruptedExce
 public Collection<Company> getAllCompanies() throws UserNotFoundException, InterruptedException, SQLException {
 
 	//Ask for connection from the connection pool
-	Connection dbConnection = ConnectionPool.getInstance().getConnection();
+	DbConnection dbConnection = ConnectionPool.getInstance().getConnection();
 	
 	Collection<Company> comp = (Collection<Company>) companyRepo.findAll();
 
@@ -257,7 +256,7 @@ public boolean login (String companyName, String password)
 		throws UserNotFoundException, WrongPasswordException, InterruptedException, SQLException{
 	
 	//Ask for connection from the connection pool
-		Connection dbConnection = ConnectionPool.getInstance().getConnection();
+		DbConnection dbConnection = ConnectionPool.getInstance().getConnection();
 	
 	//If a company with this name does not exist - return connection and throw exception
 	if (!companyRepo.existsByCompanyName(companyName)) {

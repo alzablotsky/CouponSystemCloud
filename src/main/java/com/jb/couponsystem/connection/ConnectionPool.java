@@ -21,15 +21,11 @@ public class ConnectionPool {
 	// maximum number of connections
 	private static final int NUMBER_OF_CONNECTIONS = 5;
 
-	private static final String JDBC_DATABASE_URL = "jdbc:postgresql://ec2-50-16-241-91.compute-1.amazonaws.com:5432/ddq7dvm2gtnmso?sslmode=require&user=woluaerpglffdu&password=1b49a02b34fca862f4820ded890cdaf675a362f80dc2833155e5c0e277ec39cc"
-
-;
-
 	//instance for the class - initially is null
 	private static ConnectionPool _instance = null;
 
 	// list of connections
-	private ArrayList<Connection> connections = null;
+	private ArrayList<DbConnection> connections = null;
 
 	// Private CTOR - creates the allowed number of connections and adds them to the list
 	private ConnectionPool() throws SQLException {
@@ -41,18 +37,11 @@ public class ConnectionPool {
 		for (int i = 0; i < NUMBER_OF_CONNECTIONS; i++)
 		{
 			// create DB connection
-			//DbConnection dbConnection = new DbConnection();
-			
-			//Connection dbConnection = DriverManager.getConnection(
-			//	  "jdbc:postgresql://localhost/webproject","postgres", "admin");
-		
-			
-			//Connection dbConnection = DriverManager.getConnection(JDBC_DATABASE_URL);
+			DbConnection dbConnection =new DbConnection();
 						
-			Connection dbConnection =null;
-
+		
 			// add DBConnection to the list
-			this.connections.add( dbConnection );
+			this.connections.add(dbConnection );
 		}
 	}
 
@@ -86,13 +75,13 @@ public class ConnectionPool {
 	 * @return connection connection object
 	 * @throws InterruptedException if the thread is interrupted
 	 */
-	public synchronized Connection getConnection() throws InterruptedException {
+	public synchronized DbConnection getConnection() throws InterruptedException {
 		while (this.connections.size() == 0) {
 			System.err.println("Thread " + Thread.currentThread().getName() + " is waiting now since there are no available connections.");
 			wait();
 		}
 		
-		Connection connection = this.connections.get(0);
+		DbConnection connection = this.connections.get(0);
 		this.connections.remove(0);
 		System.out.println("Giving connection : " + connection + " to thread " + Thread.currentThread().getName());
 		
@@ -106,7 +95,7 @@ public class ConnectionPool {
 	 * 
 	 * @param connection connection object
 	 */
-	public synchronized void returnConnection(Connection connection)
+	public synchronized void returnConnection(DbConnection connection)
 	{
 		this.connections.add(connection);
 		System.out.println("Returning connection "  + connection +   ". Thread " + Thread.currentThread().getName() + " is calling notify.");

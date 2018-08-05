@@ -98,7 +98,7 @@ public class CouponDBDAO implements CouponDAO {
 	public void createCoupon(Coupon c) throws CouponAlreadyExistsException, InterruptedException, SQLException {
 		
 		//Ask for connection from the connection pool
-		Connection dbConnection = ConnectionPool.getInstance().getConnection();
+		DbConnection dbConnection = ConnectionPool.getInstance().getConnection();
 
 		//If a coupon with this ID already exists - return connection and throw exception
 		if (couponRepo.existsById(c.getId())) {
@@ -137,7 +137,7 @@ public class CouponDBDAO implements CouponDAO {
 	public void removeCoupon(Coupon c) throws CouponNotFoundException, InterruptedException, SQLException {
 
 		//Ask for connection from the connection pool
-		Connection dbConnection = ConnectionPool.getInstance().getConnection();
+		DbConnection dbConnection = ConnectionPool.getInstance().getConnection();
 
 		//If a coupon with this ID of the company with this ID does not exist - return connection and throw exception
 		if (!couponRepo.existsByIdAndCompanyId(c.getId(), this.loginCompany.getId())) {
@@ -170,7 +170,7 @@ public class CouponDBDAO implements CouponDAO {
 	public void updateCoupon(Coupon c) throws CouponNotFoundException, IllegalUpdateException, InterruptedException, SQLException {
 
 		//Ask for connection from the connection pool
-		Connection dbConnection = ConnectionPool.getInstance().getConnection();
+		DbConnection dbConnection = ConnectionPool.getInstance().getConnection();
 		
 		
 		//Compare to the coupon in DB
@@ -268,12 +268,11 @@ public class CouponDBDAO implements CouponDAO {
 	 * (non-Javadoc)
 	 * @see com.jb.couponsystem.dao.CouponDAO#getCompanyCoupon(long)
 	 */
-	//@Cacheable(value = "coupon", key = "#id")
 	@Override
 	public Coupon getCompanyCoupon(long id) throws CouponNotFoundException, InterruptedException, SQLException {
 
 		//Ask for connection from the connection pool
-		Connection dbConnection = ConnectionPool.getInstance().getConnection();
+		DbConnection dbConnection = ConnectionPool.getInstance().getConnection();
 
 		//If coupon with this ID of the company with this ID does not exist -  return connection and throw exception
 		if (!couponRepo.existsByIdAndCompanyId(id, this.loginCompany.getId()))  {
@@ -305,7 +304,7 @@ public class CouponDBDAO implements CouponDAO {
 	public Collection<Coupon> getAllCompanyCoupons() throws CouponNotFoundException, InterruptedException, SQLException {
 
 		//Ask for connection from the connection pool
-		Connection dbConnection = ConnectionPool.getInstance().getConnection();
+		DbConnection dbConnection = ConnectionPool.getInstance().getConnection();
 
 		Collection<Coupon> coupons =
 				(Collection<Coupon>) couponRepo.findCouponByCompanyId(this.loginCompany.getId());
@@ -339,7 +338,7 @@ public class CouponDBDAO implements CouponDAO {
 	public Collection<Coupon> getCompanyCouponsByType(CouponType type) throws CouponNotFoundException, InterruptedException, SQLException {
 
 		//Ask for connection from the connection pool
-				Connection dbConnection = ConnectionPool.getInstance().getConnection();
+				DbConnection dbConnection = ConnectionPool.getInstance().getConnection();
 
 		Collection<Coupon> coupons =
 				(Collection<Coupon>) couponRepo.findCouponByTypeAndCompanyId(type, this.loginCompany.getId());	
@@ -372,7 +371,7 @@ public class CouponDBDAO implements CouponDAO {
 	public Collection<Coupon> getCompanyCouponsByPrice(double price) throws CouponNotFoundException, InterruptedException, SQLException {
 
 		//Ask for connection from the connection pool
-		Connection dbConnection = ConnectionPool.getInstance().getConnection();
+		DbConnection dbConnection = ConnectionPool.getInstance().getConnection();
 		Collection<Coupon> coupons =
 				(Collection<Coupon>) couponRepo.findByMaxPriceAndCompanyId(price, this.loginCompany.getId());
 
@@ -405,7 +404,7 @@ public class CouponDBDAO implements CouponDAO {
 	public Collection<Coupon> getCompanyCouponsByEndDate(Date endDate) throws CouponNotFoundException, InterruptedException, SQLException {
 
 		//Ask for connection from the connection pool
-		Connection dbConnection = ConnectionPool.getInstance().getConnection();
+		DbConnection dbConnection = ConnectionPool.getInstance().getConnection();
 
 		Collection<Coupon> coupons =
 				(Collection<Coupon>) couponRepo.findByMaxEndDateAndCompanyId(endDate, this.loginCompany.getId());
@@ -433,11 +432,10 @@ public class CouponDBDAO implements CouponDAO {
 	 * (non-Javadoc)
 	 * @see com.jb.couponsystem.dao.CouponDAO#getCoupon(long)
 	 */
-	//@Cacheable(value = "coupon", key = "#id")
 	@Override
 	public Coupon getCoupon(long id) throws CouponNotFoundException, InterruptedException, SQLException {
 		//Ask for connection from the connection pool
-		Connection dbConnection = ConnectionPool.getInstance().getConnection();
+		DbConnection dbConnection = ConnectionPool.getInstance().getConnection();
 
 		//If coupon with this ID does not exist -  return connection and throw exception
 		if (!couponRepo.existsById(id))  {
@@ -467,7 +465,7 @@ public class CouponDBDAO implements CouponDAO {
 	public Collection<Coupon> getAllCoupons() throws CouponNotFoundException, InterruptedException, SQLException {
 		
 		//Ask for connection from the connection pool
-		Connection dbConnection = ConnectionPool.getInstance().getConnection();
+		DbConnection dbConnection = ConnectionPool.getInstance().getConnection();
 
 		Collection<Coupon> coupons =
 				(Collection<Coupon>) couponRepo.findAll();
@@ -502,7 +500,7 @@ public class CouponDBDAO implements CouponDAO {
 			throws CouponNotFoundException, CouponAlreadyPurchasedException, CouponOutOfStockException, CouponExpiredException, InterruptedException, SQLException {
 
 		//Ask for connection from the connection pool
-		Connection dbConnection = ConnectionPool.getInstance().getConnection();
+		DbConnection dbConnection = ConnectionPool.getInstance().getConnection();
 
 		//Collection <Customer> couponCustomers = c.getCustomers();	
 		Date today= new Date();
@@ -556,7 +554,7 @@ public class CouponDBDAO implements CouponDAO {
 	public Collection<Coupon> getAllPurchasedCoupons() throws CouponNotFoundException, InterruptedException, SQLException {
 
 		//Ask for connection from the connection pool
-		Connection dbConnection = ConnectionPool.getInstance().getConnection();
+		DbConnection dbConnection = ConnectionPool.getInstance().getConnection();
 
 		Collection<Coupon> coupons =
 				(Collection<Coupon>) couponRepo.findCustomerCoupons(this.loginCustomer.getId());	
@@ -585,7 +583,7 @@ public class CouponDBDAO implements CouponDAO {
 	public Collection<Coupon> getAllPurchasedCouponsByType(CouponType type) throws CouponNotFoundException, InterruptedException, SQLException {
 
 		//Ask for connection from the connection pool
-		Connection dbConnection = ConnectionPool.getInstance().getConnection();
+		DbConnection dbConnection = ConnectionPool.getInstance().getConnection();
 
 		Collection<Coupon> coupons =
 				(Collection<Coupon>) couponRepo.findCustomerCouponsByType(this.loginCustomer.getId(), type);	
@@ -613,7 +611,7 @@ public class CouponDBDAO implements CouponDAO {
 	public Collection<Coupon> getAllPurchasedCouponsByPrice(double price) throws CouponNotFoundException, InterruptedException, SQLException {
 
 		//Ask for connection from the connection pool
-		Connection dbConnection = ConnectionPool.getInstance().getConnection();
+		DbConnection dbConnection = ConnectionPool.getInstance().getConnection();
 
 		Collection<Coupon> coupons =
 				(Collection<Coupon>) couponRepo.findCustomerCouponsByMaxPrice(this.loginCustomer.getId(), price);
@@ -643,7 +641,7 @@ public class CouponDBDAO implements CouponDAO {
 	public Collection<Coupon> getAllNonPurchasedCoupons() throws CouponNotFoundException, InterruptedException, SQLException {
 		
 		//Ask for connection from the connection pool
-		Connection dbConnection = ConnectionPool.getInstance().getConnection();
+		DbConnection dbConnection = ConnectionPool.getInstance().getConnection();
 		
 		Collection<Coupon> nonPurchased =(Collection<Coupon>) couponRepo.findNonCustomerCoupons(this.loginCustomer.getId());
 				
@@ -672,7 +670,7 @@ public class CouponDBDAO implements CouponDAO {
 	public void removeCompanyCoupons(long id) throws InterruptedException, SQLException {
 
 		//Ask for connection from the connection pool
-		Connection dbConnection = ConnectionPool.getInstance().getConnection();
+		DbConnection dbConnection = ConnectionPool.getInstance().getConnection();
 
 		//If a coupon with this ID of the company with this ID does not exist - return connection and print message
 		if (!couponRepo.existsByCompanyId(id)) {
