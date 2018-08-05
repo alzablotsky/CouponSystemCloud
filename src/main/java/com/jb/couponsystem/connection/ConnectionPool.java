@@ -47,9 +47,9 @@ public class ConnectionPool {
 			//	  "jdbc:postgresql://localhost/webproject","postgres", "admin");
 		
 			
-			Connection dbConnection = DriverManager.getConnection(JDBC_DATABASE_URL);
+			//Connection dbConnection = DriverManager.getConnection(JDBC_DATABASE_URL);
 						
-			//Connection dbConnection =null;
+			Connection dbConnection =null;
 
 			// add DBConnection to the list
 			this.connections.add( dbConnection );
